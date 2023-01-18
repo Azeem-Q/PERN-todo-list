@@ -1,0 +1,6 @@
+{
+  "prettier.singleAttributePerLine": true,
+  "[sql]": {
+    "editor.defaultFormatter": "cweijan.vscode-mysql-client2"
+  }
+}
