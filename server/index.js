@@ -15,12 +15,11 @@ app.use(express.json()); //req.body
 app.post("/todos", async (req, res) => {
   try {
     const { description } = req.body;
-    /*const newTodo = await pool.query(
-      "INSERT INTO todo (description) VALUES($1)",
+    const newTodo = await pool.query(
+      "INSERT INTO todo (description) VALUES($1) RETURNING *",
       [description]
     );
-    res.json(newTodo);*/
-    console.log('string:', process.env.DB_USER);
+    res.json(newTodo);
   } catch (err) {
     console.error(err.message);
   }
