@@ -1,7 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useRef } from "react";
 
 const EditTodo = ({ todo }) => {
   const [description, setDescription] = useState(todo.description);
+
+  const modalInput = useRef(null);
+
+  const handleEditFocus = () => {
+    modalInput.current.focus();
+  };
 
   // edit description function
 
@@ -21,6 +27,13 @@ const EditTodo = ({ todo }) => {
       console.error(err.message);
     }
   };
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      updateDescription(e);
+    }
+  };
+
   return (
     <Fragment>
       <button
@@ -28,6 +41,7 @@ const EditTodo = ({ todo }) => {
         className="btn btn-warning"
         data-bs-toggle="modal"
         data-bs-target={`#id${todo.todo_id}`}
+        onClick={handleEditFocus}
       >
         Edit
       </button>
@@ -55,6 +69,8 @@ const EditTodo = ({ todo }) => {
                 className="form-control"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                onKeyDown={(e) => handleEnter(e)}
+                ref={modalInput}
               />
             </div>
 
